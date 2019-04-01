@@ -1,0 +1,28 @@
+service:
+  name: serverless-nest-boilerplate
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  # - serverless-plugin-optimize
+
+custom:
+  defaultStage: dev
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: eu-central-1
+  # profile:
+
+# package:
+#   individually: true
+
+functions:
+  main:
+    handler: src/main.handler
+    events:
+      - http:
+          method: any
+          path: /{proxy+}

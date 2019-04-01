@@ -1,0 +1,76 @@
+{
+  "name": "serverless-nest-boilerplate",
+  "version": "1.0.0",
+  "description": "Serverless Nest Boilerplate",
+  "author": "Dario Ielardi",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "webpack": "rimraf .build-dev && webpack --config webpack.config.js",
+    "start": "ts-node -r tsconfig-paths/register src/main.dev.ts",
+    "start:sls": "sls offline start --skipCacheInvalidation",
+    "start:dev": "node .build-dev/server",
+    "start:nodemon": "nodemon",
+    "start:nodemon-debug": "nodemon --config nodemon-debug.json",
+    "prestart:prod": "rimraf .build-dev && npm run build",
+    "start:prod": "node .build-dev/main.js",
+    "lint": "tslint -p tsconfig.dev.json -c tslint.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^6.0.5",
+    "@nestjs/core": "^6.0.5",
+    "@nestjs/microservices": "^6.0.4",
+    "@nestjs/platform-express": "^6.0.4",
+    "@nestjs/websockets": "^6.0.4",
+    "aws-serverless-express": "^3.3.6",
+    "class-transformer": "^0.2.0",
+    "class-validator": "^0.9.1",
+    "reflect-metadata": "0.1.13",
+    "rimraf": "2.6.3",
+    "rxjs": "6.4.0"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "6.0.5",
+    "@types/aws-lambda": "^8.10.23",
+    "@types/express": "4.16.1",
+    "@types/jest": "24.0.11",
+    "@types/node": "11.12.2",
+    "@types/supertest": "2.0.7",
+    "jest": "24.5.0",
+    "nodemon": "1.18.10",
+    "prettier": "1.16.4",
+    "serverless-offline": "^4.9.3",
+    "serverless-plugin-optimize": "^4.0.2-rc.1",
+    "serverless-plugin-typescript": "^1.1.5",
+    "supertest": "4.0.2",
+    "ts-jest": "24.0.1",
+    "ts-loader": "^5.3.3",
+    "ts-node": "8.0.3",
+    "tsconfig-paths": "3.8.0",
+    "tslint": "5.14.0",
+    "typescript": "3.4.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
